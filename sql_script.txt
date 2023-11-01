@@ -101,8 +101,8 @@ CREATE TABLE ecommerce.dbo.tb_payment (
 	paymentId int IDENTITY(1,1) NOT NULL,
 	paymentType int NOT NULL,
 	providerName int NOT NULL,
-	providerCode datetime NULL,
-	accountNo datetime NULL,
+	providerCode varchar(255) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	accountNo varchar(255) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
 	createDate datetime NULL,
 	modifyDate datetime NULL,
 	CONSTRAINT PK__tb_payme__A0D9EFC66A66FA1A PRIMARY KEY (paymentId)
