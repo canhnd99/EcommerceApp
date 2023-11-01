@@ -1,0 +1,132 @@
+-- DROP SCHEMA dbo;
+
+CREATE SCHEMA dbo;
+-- ecommerce.dbo.tb_account_customer definition
+
+-- Drop table
+
+-- DROP TABLE ecommerce.dbo.tb_account_customer;
+
+CREATE TABLE ecommerce.dbo.tb_account_customer (
+	customerId int IDENTITY(1,1) NOT NULL,
+	username varchar(50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	password varchar(50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	phone varchar(30) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	email varchar(150) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	address varchar(255) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	fullName varchar(255) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	avatar varchar(255) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	providerCode datetime NULL,
+	createDate datetime NULL,
+	modifyDate datetime NULL,
+	CONSTRAINT PK__tb_accou__B611CB7D80381F3B PRIMARY KEY (customerId)
+);
+
+
+-- ecommerce.dbo.tb_account_manager definition
+
+-- Drop table
+
+-- DROP TABLE ecommerce.dbo.tb_account_manager;
+
+CREATE TABLE ecommerce.dbo.tb_account_manager (
+	managerId int IDENTITY(1,1) NOT NULL,
+	username varchar(50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	password varchar(50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[role] int NOT NULL,
+	fullname varchar(255) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	avatar varchar(255) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	createDate datetime NULL,
+	modifyDate datetime NULL,
+	CONSTRAINT PK__tb_accou__47E0141FD64586C8 PRIMARY KEY (managerId)
+);
+
+
+-- ecommerce.dbo.tb_category definition
+
+-- Drop table
+
+-- DROP TABLE ecommerce.dbo.tb_category;
+
+CREATE TABLE ecommerce.dbo.tb_category (
+	categoryId int IDENTITY(1,1) NOT NULL,
+	name varchar(255) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	unit int NOT NULL,
+	CONSTRAINT PK__tb_categ__23CAF1D8992AB8DB PRIMARY KEY (categoryId)
+);
+
+
+-- ecommerce.dbo.tb_order definition
+
+-- Drop table
+
+-- DROP TABLE ecommerce.dbo.tb_order;
+
+CREATE TABLE ecommerce.dbo.tb_order (
+	orderId int IDENTITY(1,1) NOT NULL,
+	orderCode varchar(50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	toalPrice int NOT NULL,
+	createDate datetime NULL,
+	modifyDate datetime NULL,
+	customerId int NOT NULL,
+	CONSTRAINT PK__tb_order__0809335DD1BF29CA PRIMARY KEY (orderId)
+);
+
+
+-- ecommerce.dbo.tb_order_detail definition
+
+-- Drop table
+
+-- DROP TABLE ecommerce.dbo.tb_order_detail;
+
+CREATE TABLE ecommerce.dbo.tb_order_detail (
+	orderDetailId int IDENTITY(1,1) NOT NULL,
+	quantity int NOT NULL,
+	price int NOT NULL,
+	createDate datetime NULL,
+	modifyDate datetime NULL,
+	orderId int NOT NULL,
+	productId int NOT NULL,
+	CONSTRAINT PK__tb_order__E4FEDE4A59D90E8A PRIMARY KEY (orderDetailId)
+);
+
+
+-- ecommerce.dbo.tb_payment definition
+
+-- Drop table
+
+-- DROP TABLE ecommerce.dbo.tb_payment;
+
+CREATE TABLE ecommerce.dbo.tb_payment (
+	paymentId int IDENTITY(1,1) NOT NULL,
+	paymentType int NOT NULL,
+	providerName int NOT NULL,
+	providerCode datetime NULL,
+	accountNo datetime NULL,
+	createDate datetime NULL,
+	modifyDate datetime NULL,
+	CONSTRAINT PK__tb_payme__A0D9EFC66A66FA1A PRIMARY KEY (paymentId)
+);
+
+
+-- ecommerce.dbo.tb_product definition
+
+-- Drop table
+
+-- DROP TABLE ecommerce.dbo.tb_product;
+
+CREATE TABLE ecommerce.dbo.tb_product (
+	productId int IDENTITY(1,1) NOT NULL,
+	name varchar(255) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	quantity int NOT NULL,
+	price int NOT NULL,
+	status int NOT NULL,
+	discount int NULL,
+	picture varchar(255) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	description varchar(255) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	createDate datetime NULL,
+	startDateDiscount datetime NULL,
+	endDateDiscount datetime NULL,
+	categoryId int NOT NULL,
+	CONSTRAINT PK__tb_produ__2D10D16A03FDAF16 PRIMARY KEY (productId)
+);
