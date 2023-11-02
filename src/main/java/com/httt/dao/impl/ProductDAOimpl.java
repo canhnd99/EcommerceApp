@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.httt.dao.ProductDAO;
+import com.httt.entities.Account;
 import com.httt.entities.Product;
 
 @Repository
@@ -169,6 +170,23 @@ public class ProductDAOimpl implements ProductDAO {
 			session.close();
 		}
 		return null;
+	}
+
+	@Override
+	public boolean addNew(Product product) {
+		Session session = sessionFactory.openSession();
+		try {
+			session.beginTransaction();
+			session.save(product);
+			session.getTransaction().commit();
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			session.getTransaction().rollback();
+		} finally {
+			session.close();
+		}
+		return false;
 	}
 
 }

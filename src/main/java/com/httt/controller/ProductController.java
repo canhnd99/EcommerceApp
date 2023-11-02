@@ -48,8 +48,6 @@ public class ProductController {
 		List<Product> allProducts = productDAO.getProducts();
 		List<Category> categories = categoryDAO.getCategories();
 		
-		System.out.println(allProducts);
-
 		model.addAttribute("products", allProducts);
 		model.addAttribute("categories", categories);
 		model.addAttribute("rootPath", rootPath);
@@ -177,8 +175,6 @@ public class ProductController {
 			@RequestParam(required = false, name = "page") Integer page, Model model) {
 		List<Product> allProducts = productDAO.search(key);
 		if(!allProducts.isEmpty()) {
-			
-			
 			PagingResponse response = PagingUtil.getPagingResponse(allProducts, pageSize, page);
 
 			model.addAttribute("products", response.getProducts());

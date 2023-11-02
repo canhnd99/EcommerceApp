@@ -179,7 +179,7 @@
 			<ul class="topbar-mobile">
 				<li>
 					<div class="left-top-bar">
-						Miễn phí ship cho đơn hàng lớn hơn 500 VNĐ
+						Miễn phí ship cho đơn hàng lớn hơn 500.000 VNĐ
 					</div>
 				</li>
 

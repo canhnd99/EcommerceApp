@@ -24,4 +24,6 @@ public interface ProductDAO {
 	public List<Product> getRelatedProducts(Integer categoryId);
 	
 	public Product findById(int id);
+
+	public boolean addNew(Product product);
 }

@@ -83,28 +83,34 @@ button:hover {
 
 <body>
 	<div class="cover">
-		<form action="${rootPath}/account/signin" method="post" style="border: 1px solid #ccc">
-			<div class="container">
-				<h1 style="text-align: center; padding-top: 20px">Đăng Nhập</h1>
-				<hr>
-
-				<label for="phone"><b>Số điện thoại</b></label> 
-				<input type="text" placeholder="VD: 0357623918" name="phone" value="0346770412" required> 
-				
-				<label for="password"><b>Mật khẩu</b></label> 
-				<input type="password" placeholder="..........." name="password" value="admin@123" required>
-
-				<div class="clearfix">
-					<div class="submit-btn">
-						<button type="submit" class="signupbtn">Đăng nhập</button>
-					</div>
-				</div>
-				
-				<div class="regis_link">
-					<p style="font-size: 17px">Chưa có tài khoản, <a href="${rootPath}/account/signup-form">đăng ký</a></p>
-				</div>
-			</div>
-		</form>
+		<button style="width: 150px" onclick="location.href='${rootPath}/admin/new-product-form'" 
+			class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5"> Thêm mới </button>
+		<table class="table">
+		  <thead>
+		    <tr>
+		      <th scope="col">Tên sản phẩm</th>
+		      <th scope="col">Số lượng</th>
+		      <th scope="col">Giá</th>
+		      <th scope="col">Trạng thái</th>
+		      <th scope="col">Giảm giá</th>
+		      <th scope="col">Mô tả</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		  	<c:forEach items="${products}" var="p">
+		  			<tr>
+				      <td>${p.name}</td>
+				      <td>${p.quantity}</td>
+				      <td>${p.price}</td>
+				      <td>${p.status}</td>
+				      <td>${p.discount}</td>
+				      <td>${p.description}</td>
+				      <td><button>Cập nhật</button></td>
+				      <td><button>Xóa</button></td>
+				    </tr>
+			</c:forEach>	
+		  </tbody>
+		</table>
 	</div>
 </body>
 

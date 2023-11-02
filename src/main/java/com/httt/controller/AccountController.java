@@ -1,6 +1,7 @@
 package com.httt.controller;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -14,9 +15,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.httt.dao.AccountCustomerDAO;
+import com.httt.dao.AccountDAO;
 import com.httt.dao.CategoryDAO;
-import com.httt.entities.AccountCustomer;
+import com.httt.entities.Account;
 import com.httt.entities.Category;
 import com.httt.util.PasswordUtil;
 import com.httt.util.SessionUtil;
@@ -34,7 +35,7 @@ public class AccountController {
 	private CategoryDAO categoryDAO;
 
 	@Autowired
-	private AccountCustomerDAO accountDAO;
+	private AccountDAO accountDAO;
 
 	@RequestMapping(value = { "/account/signup-form" })
 	public String getSignupForm(HttpServletRequest request, Model model) {
@@ -58,14 +59,15 @@ public class AccountController {
 		
 		String encodePass = PasswordUtil.getMD5Password(password);
 
-		AccountCustomer account = AccountCustomer.builder()
-				.customerId(UUID.randomUUID().toString())
-				.fullName(fullname)
+		Account account = Account.builder()
 				.username(username)
+				.password(encodePass)
+				.phone(phone)
 				.email(email)
 				.address(address)
-				.phone(phone)
-				.password(encodePass)
+				.fullName(fullname)
+				.avatar("")
+				.createDate(new Date())
 				.build();
 
 		boolean isRegis = accountDAO.signup(account);
@@ -95,11 +97,18 @@ public class AccountController {
 		
 		String encodePass = PasswordUtil.getMD5Password(password);
 
-		AccountCustomer loginAccount = accountDAO.checkLogin(phone, encodePass);
-		
+		Account loginAccount = accountDAO.checkLogin(phone, encodePass);
+	
 		if(loginAccount != null) {
 			SessionUtil.getInstance().putValue(req, "ACCOUNT", loginAccount);
-			resp.sendRedirect(rootPath);
+			
+			// admin -> redirect to admin page
+			String role = loginAccount.getRole();
+			if("ADMIN".equals(role)) {
+				resp.sendRedirect(rootPath + "/admin");
+			} else {
+				resp.sendRedirect(rootPath);
+			}
 		} else {
 			resp.sendRedirect(rootPath + "/account/login-fail");
 		}

@@ -1,10 +1,11 @@
 package com.httt.entities;
 
-
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -18,11 +19,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "tb_account_manager")
-public class AccountManager {
+@Table(name = "tb_account")
+public class Account {
 	@Id
-	@Column(name = "managerId")
-	private Integer managerId;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "customerId")
+	private Integer customerId;
 	
 	@Column(name = "username")
 	private String username;
@@ -30,15 +32,24 @@ public class AccountManager {
 	@Column(name = "password")
 	private String password;
 	
-	@Column(name = "role")
-	private Integer role;	
+	@Column(name = "phone")
+	private String phone;
 	
-	@Column(name = "fullname")
-	private String fullname;
-
+	@Column(name = "email")
+	private String email;
+	
+	@Column(name = "address")
+	private String address;
+	
+	@Column(name = "fullName")
+	private String fullName;
+	
 	@Column(name = "avatar")
 	private String avatar;
 	
+	@Column(name = "role")
+	private String role;
+
 	@Column(name = "createDate")
 	private Date createDate;
 	

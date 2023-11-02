@@ -112,7 +112,7 @@
 	input.addEventListener("keypress", function(event) {
 	  if (event.key === "Enter") {
 	    event.preventDefault();
-	    var url = "http://localhost:8080/efarm/products/search?key=" + input.value
+	    var url = "http://localhost:8080/products/search?key=" + input.value
 	    window.open(url, '_self').focus();
 	  }
 	});
