@@ -58,7 +58,9 @@ public class AccountController {
 		String password = req.getParameter("password");
 		
 		String encodePass = PasswordUtil.getMD5Password(password);
-
+		
+		Account account2 = new Account();
+		account2.setUsername(username);
 //		Account account = Account.builder()
 //				.username(username)
 //				.password(encodePass)
@@ -67,11 +69,9 @@ public class AccountController {
 //				.address(address)
 //				.fullName(fullname)
 //				.avatar("")
+//				.role("USER")
 //				.createDate(new Date())
 //				.build();
-		
-		Account account2 = new Account();
-		account2.setUsername(username);
 
 		boolean isRegis = accountDAO.signup(account2);
 		

@@ -16,7 +16,7 @@ import com.httt.dao.CategoryDAO;
 import com.httt.dao.ProductDAO;
 import com.httt.dto.PagingResponse;
 import com.httt.entities.Category;
-import com.httt.entities.Product;
+import com.httt.entities.ProductLog;
 import com.httt.util.PagingUtil;
 import com.httt.util.SessionUtil;
 
@@ -45,7 +45,7 @@ public class ProductController {
 	
 	@RequestMapping(value = { "/" })
 	public String homePage(HttpServletRequest req, Model model) {
-		List<Product> allProducts = productDAO.getProducts();
+		List<ProductLog> allProducts = productDAO.getProducts();
 		List<Category> categories = categoryDAO.getCategories();
 		
 		model.addAttribute("products", allProducts);
@@ -59,7 +59,7 @@ public class ProductController {
 	
 	@RequestMapping(value = { "/products/paging" })
 	public String getByPaging(HttpServletRequest req, @RequestParam(required = false, name = "page") Integer page, Model model) {
-		List<Product> allProducts = productDAO.getProducts();
+		List<ProductLog> allProducts = productDAO.getProducts();
 		List<Category> categories = categoryDAO.getCategories();
 		
 		PagingResponse response = PagingUtil.getPagingResponse(allProducts, pageSize, page);
@@ -82,7 +82,7 @@ public class ProductController {
 		
 		int currentcategoryId = categoryId;
 		
-		List<Product> allProducts = productDAO.getByCategory(categoryId);
+		List<ProductLog> allProducts = productDAO.getByCategory(categoryId);
 		List<Category> categories = categoryDAO.getCategories();
 		
 		PagingResponse response = PagingUtil.getPagingResponse(allProducts, pageSize, page);
@@ -100,7 +100,7 @@ public class ProductController {
 
 	@RequestMapping(value = { "/products/newest" })
 	public String getNewestProducts(HttpServletRequest req, @RequestParam(required = false, name = "page") Integer page, Model model) {
-		List<Product> allProducts = productDAO.getNewestProducts(numberOfNewestProducts);
+		List<ProductLog> allProducts = productDAO.getNewestProducts(numberOfNewestProducts);
 		List<Category> categories = categoryDAO.getCategories();
 		
 		PagingResponse response = PagingUtil.getPagingResponse(allProducts, pageSize, page);
@@ -118,7 +118,7 @@ public class ProductController {
 	
 	@RequestMapping(value = { "/products/feature" })
 	public String getFeatureProducts(HttpServletRequest req, @RequestParam(required = false, name = "page") Integer page, Model model) {
-		List<Product> allProducts = productDAO.getFeatureProducts();
+		List<ProductLog> allProducts = productDAO.getFeatureProducts();
 		List<Category> categories = categoryDAO.getCategories();
 		
 		PagingResponse response = PagingUtil.getPagingResponse(allProducts, pageSize, page);
@@ -136,7 +136,7 @@ public class ProductController {
 	
 	@RequestMapping(value = { "/products/discount" })
 	public String getDiscountProducts(HttpServletRequest req, @RequestParam(required = false, name = "page") Integer page, Model model) {
-		List<Product> allProducts = productDAO.getDiscountProducts();
+		List<ProductLog> allProducts = productDAO.getDiscountProducts();
 		List<Category> categories = categoryDAO.getCategories();
 		
 		PagingResponse response = PagingUtil.getPagingResponse(allProducts, pageSize, page);
@@ -154,7 +154,7 @@ public class ProductController {
 	
 	@RequestMapping(value = { "/products/bestsale" })
 	public String getBestSaleProducts(HttpServletRequest req, @RequestParam(required = false, name = "page") Integer page, Model model) {
-		List<Product> allProducts = productDAO.getBestSaleProducts(numberOfBestSaleProds);
+		List<ProductLog> allProducts = productDAO.getBestSaleProducts(numberOfBestSaleProds);
 		List<Category> categories = categoryDAO.getCategories();
 		
 		PagingResponse response = PagingUtil.getPagingResponse(allProducts, pageSize, page);
@@ -173,7 +173,7 @@ public class ProductController {
 	@RequestMapping(value = { "/products/search" })
 	public String getBestSaleProducts(HttpServletRequest req, @RequestParam(required = false, name = "key") String key,
 			@RequestParam(required = false, name = "page") Integer page, Model model) {
-		List<Product> allProducts = productDAO.search(key);
+		List<ProductLog> allProducts = productDAO.search(key);
 		if(!allProducts.isEmpty()) {
 			PagingResponse response = PagingUtil.getPagingResponse(allProducts, pageSize, page);
 
@@ -195,9 +195,9 @@ public class ProductController {
 	public String getProductId(HttpServletRequest req, @RequestParam(required = false, name = "prodId") Integer prodId, Model model) {
 		List<Category> categories = categoryDAO.getCategories();
 		if(prodId != null) {
-			Product product = productDAO.getProductDetail(prodId);
+			ProductLog product = productDAO.getProductDetail(prodId);
 			
-			List<Product> relatedProds = productDAO.getRelatedProducts(product.getCategoryId());
+			List<ProductLog> relatedProds = productDAO.getRelatedProducts(product.getCategoryId());
 			
 			model.addAttribute("product", product);
 			

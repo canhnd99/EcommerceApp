@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.httt.dao.ProductDAO;
 import com.httt.entities.Account;
-import com.httt.entities.Product;
+import com.httt.entities.ProductLog;
 
 @Repository
 public class ProductDAOimpl implements ProductDAO {
@@ -18,7 +18,7 @@ public class ProductDAOimpl implements ProductDAO {
 	private SessionFactory sessionFactory;
 
 	@Override
-	public List<Product> getProducts() {
+	public List<ProductLog> getProducts() {
 		Session session = sessionFactory.openSession();
 		try {
 			List list = session.createQuery("from Product").list();
@@ -32,10 +32,10 @@ public class ProductDAOimpl implements ProductDAO {
 	}
 
 	@Override
-	public Product findById(int id) {
+	public ProductLog findById(int id) {
 		Session session = sessionFactory.openSession();
 		try {
-			return session.get(Product.class, id);
+			return session.get(ProductLog.class, id);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -46,10 +46,10 @@ public class ProductDAOimpl implements ProductDAO {
 	}
 
 	@Override
-	public List<Product> getByCategory(Integer categoryId) {
+	public List<ProductLog> getByCategory(Integer categoryId) {
 		Session session = sessionFactory.openSession();
 		try {
-			Query<Product> query = null;
+			Query<ProductLog> query = null;
 			if(categoryId == null) {
 				query = session.createQuery("from Product");
 			} else {
@@ -66,11 +66,11 @@ public class ProductDAOimpl implements ProductDAO {
 	}
 
 	@Override
-	public List<Product> getNewestProducts(Integer numberOfNewestProducts) {
+	public List<ProductLog> getNewestProducts(Integer numberOfNewestProducts) {
 		Session session = sessionFactory.openSession();
 		try {
-			Query<Product> query = session.createQuery("from Product p order by p.creataDate desc");
-			List<Product> result = query.getResultList().subList(0, numberOfNewestProducts);
+			Query<ProductLog> query = session.createQuery("from Product p order by p.createDate desc");
+			List<ProductLog> result = query.getResultList().subList(0, numberOfNewestProducts);
 			return result;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -81,11 +81,11 @@ public class ProductDAOimpl implements ProductDAO {
 	}
 
 	@Override
-	public List<Product> getFeatureProducts() {
+	public List<ProductLog> getFeatureProducts() {
 		Session session = sessionFactory.openSession();
 		try {
-			Query<Product> query = session.createQuery("from Product p where p.features = 1 order by p.creataDate desc");
-			List<Product> result = query.getResultList();
+			Query<ProductLog> query = session.createQuery("from Product p where p.features = 1 order by p.createDate desc");
+			List<ProductLog> result = query.getResultList();
 			return result;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -96,11 +96,11 @@ public class ProductDAOimpl implements ProductDAO {
 	}
 	
 	@Override
-	public Product getProductDetail(Integer prodId) {		
+	public ProductLog getProductDetail(Integer prodId) {		
 		Session session = sessionFactory.openSession();
-		Product product = new Product();
+		ProductLog product = new ProductLog();
 		try {
-			product = session.get(Product.class, prodId);
+			product = session.get(ProductLog.class, prodId);
 			return product;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -111,12 +111,12 @@ public class ProductDAOimpl implements ProductDAO {
 	}
 
 	@Override
-	public List<Product> getRelatedProducts(Integer categoryId) {
+	public List<ProductLog> getRelatedProducts(Integer categoryId) {
 		Session session = sessionFactory.openSession();
 		try {
-			Query<Product> query = session.createQuery("from Product p where p.categoryId = :categoryId and rownum <= 5 order by p.creataDate desc");
+			Query<ProductLog> query = session.createQuery("from Product p where p.categoryId = :categoryId and rownum <= 5 order by p.createDate desc");
 			query.setParameter("categoryId", categoryId);
-			List<Product> result = query.getResultList();
+			List<ProductLog> result = query.getResultList();
 			return result;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -127,11 +127,11 @@ public class ProductDAOimpl implements ProductDAO {
 	}
 
 	@Override
-	public List<Product> getDiscountProducts() {
+	public List<ProductLog> getDiscountProducts() {
 		Session session = sessionFactory.openSession();
 		try {
-			Query<Product> query = session.createQuery("from Product p where p.discount != 0 and p.discount is not null");
-			List<Product> result = query.getResultList();
+			Query<ProductLog> query = session.createQuery("from Product p where p.discount != 0 and p.discount is not null");
+			List<ProductLog> result = query.getResultList();
 			return result;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -142,11 +142,11 @@ public class ProductDAOimpl implements ProductDAO {
 	}
 
 	@Override
-	public List<Product> getBestSaleProducts(Integer numberOfProducts) {
+	public List<ProductLog> getBestSaleProducts(Integer numberOfProducts) {
 		Session session = sessionFactory.openSession();
 		try {
-			Query<Product> query = session.createQuery("from Product p order by p.quantity desc");
-			List<Product> result = query.getResultList().subList(0, numberOfProducts-1);
+			Query<ProductLog> query = session.createQuery("from Product p order by p.quantity desc");
+			List<ProductLog> result = query.getResultList().subList(0, numberOfProducts-1);
 			return result;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -157,12 +157,12 @@ public class ProductDAOimpl implements ProductDAO {
 	}
 
 	@Override
-	public List<Product> search(String key) {
+	public List<ProductLog> search(String key) {
 		Session session = sessionFactory.openSession();
 		try {
 			String sqlQuery = "from Product p where lower(p.name) like lower('%" + key + "%')";
-			Query<Product> query = session.createQuery(sqlQuery);
-			List<Product> result = query.getResultList();
+			Query<ProductLog> query = session.createQuery(sqlQuery);
+			List<ProductLog> result = query.getResultList();
 			return result;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -173,7 +173,7 @@ public class ProductDAOimpl implements ProductDAO {
 	}
 
 	@Override
-	public boolean addNew(Product product) {
+	public boolean addNew(ProductLog product) {
 		Session session = sessionFactory.openSession();
 		try {
 			session.beginTransaction();

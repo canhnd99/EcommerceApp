@@ -101,9 +101,9 @@ button:hover {
 		<table class="table">
 		  <thead>
 		    <tr>
-		      <th scope="col">Tên sản phẩm</th>
-		      <th scope="col">Số lượng</th>
-		      <th scope="col">Giá</th>
+		      <th scope="col">Tên đơn hàng</th>
+		      <th scope="col">giá tiền</th>
+		      <th scope="col">Mã khách hàng</th>
 		      <th scope="col">Trạng thái</th>
 		      <th scope="col">Giảm giá</th>
 		      <th scope="col">Mô tả</th>

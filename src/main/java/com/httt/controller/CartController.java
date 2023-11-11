@@ -21,7 +21,7 @@ import com.httt.dto.Cart;
 import com.httt.dto.Item;
 import com.httt.entities.Category;
 import com.httt.entities.Payment;
-import com.httt.entities.Product;
+import com.httt.entities.ProductLog;
 import com.httt.entities.Transport;
 import com.httt.util.SessionUtil;
 
@@ -77,7 +77,7 @@ public class CartController {
 		if(req.getParameter("productId") != null) {
 			prodId = Integer.parseInt(req.getParameter("productId"));
 			
-			Product product = productDAO.findById(prodId);
+			ProductLog product = productDAO.findById(prodId);
 			if(product != null) {
 				if(req.getParameter("quantity") != null) {
 					quantity = Integer.parseInt(req.getParameter("quantity"));
