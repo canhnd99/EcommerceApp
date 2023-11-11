@@ -59,18 +59,21 @@ public class AccountController {
 		
 		String encodePass = PasswordUtil.getMD5Password(password);
 
-		Account account = Account.builder()
-				.username(username)
-				.password(encodePass)
-				.phone(phone)
-				.email(email)
-				.address(address)
-				.fullName(fullname)
-				.avatar("")
-				.createDate(new Date())
-				.build();
+//		Account account = Account.builder()
+//				.username(username)
+//				.password(encodePass)
+//				.phone(phone)
+//				.email(email)
+//				.address(address)
+//				.fullName(fullname)
+//				.avatar("")
+//				.createDate(new Date())
+//				.build();
+		
+		Account account2 = new Account();
+		account2.setUsername(username);
 
-		boolean isRegis = accountDAO.signup(account);
+		boolean isRegis = accountDAO.signup(account2);
 		
 		model.addAttribute("categories", categories);
 		model.addAttribute("rootPath", rootPath);
@@ -92,26 +95,26 @@ public class AccountController {
 
 	@RequestMapping(value = { "/account/signin" }, method = RequestMethod.POST)
 	public void login(HttpServletRequest req, HttpServletResponse resp, Model model) throws IOException {
-		String phone = req.getParameter("phone");
-		String password = req.getParameter("password");
-		
-		String encodePass = PasswordUtil.getMD5Password(password);
-
-		Account loginAccount = accountDAO.checkLogin(phone, encodePass);
-	
-		if(loginAccount != null) {
-			SessionUtil.getInstance().putValue(req, "ACCOUNT", loginAccount);
-			
-			// admin -> redirect to admin page
-			String role = loginAccount.getRole();
-			if("ADMIN".equals(role)) {
+//		String phone = req.getParameter("phone");
+//		String password = req.getParameter("password");
+//		
+//		String encodePass = PasswordUtil.getMD5Password(password);
+//
+//		Account loginAccount = accountDAO.checkLogin(phone, encodePass);
+//	
+//		if(loginAccount != null) {
+//			SessionUtil.getInstance().putValue(req, "ACCOUNT", loginAccount);
+//			
+//			// admin -> redirect to admin page
+//			String role = loginAccount.getRole();
+//			if("ADMIN".equals(role)) {
 				resp.sendRedirect(rootPath + "/admin");
-			} else {
-				resp.sendRedirect(rootPath);
-			}
-		} else {
-			resp.sendRedirect(rootPath + "/account/login-fail");
-		}
+//			} else {
+//				resp.sendRedirect(rootPath);
+//			}
+//		} else {
+//			resp.sendRedirect(rootPath + "/account/login-fail");
+//		}
 	}
 	
 	@RequestMapping(value = { "/account/signout" })

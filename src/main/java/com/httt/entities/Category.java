@@ -29,4 +29,41 @@ public class Category implements Serializable {
 	
 	@Column(name = "unit")
 	private Integer unit;
+	
+	public Category() {
+	}
+
+
+	public Category(Integer categoryId, String name, Integer unit) {
+		super();
+		this.categoryId = categoryId;
+		this.name = name;
+		this.unit = unit;
+	}
+
+	public Integer getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId(Integer categoryId) {
+		this.categoryId = categoryId;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Integer getUnit() {
+		return unit;
+	}
+
+	public void setUnit(Integer unit) {
+		this.unit = unit;
+	}
+	
+	
 }

@@ -91,10 +91,11 @@ button:hover {
 
 <body>
 	<div class="cover">
+		hihi
 		<div class="d-flex align-content-between">
 		<button style="width: 150px" onclick="location.href='${rootPath}/admin/new-product-form'" 
 			class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5"> Thêm mới </button>
-		<button style="width: 150px" onclick="location.href='${rootPath}/admin/order-manager'" 
+		<button style="width: 150px" onclick="location.href='${rootPath}/admin/new-product-form'" 
 			class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5">Quản lý đơn hàng</button>	
 		</div>
 		<table class="table">

@@ -55,6 +55,15 @@ public class ManagerController {
 		return "add-product";
 	}
 	
+	@RequestMapping(value = { "/admin/order-manager" })
+	public String getListOrder(HttpServletRequest request, Model model) {
+		List<Category> categories = categoryDAO.getCategories();
+
+		model.addAttribute("categories", categories);
+		model.addAttribute("rootPath", rootPath);
+		return "admin_manager_order";
+	}
+	
 	@RequestMapping(value = {"/admin/product/add"})
 	public String addProduct(HttpServletRequest request, Model model) {
 		//add product
