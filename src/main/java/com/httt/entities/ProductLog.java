@@ -20,8 +20,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "tb_product")
-public class Product implements Serializable {
+@Table(name = "tb_product_log")
+public class ProductLog implements Serializable {
 	@Id
 	@Column(name = "productId")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

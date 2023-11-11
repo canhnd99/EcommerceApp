@@ -16,7 +16,7 @@ import com.httt.dao.AccountDAO;
 import com.httt.dao.CategoryDAO;
 import com.httt.dao.ProductDAO;
 import com.httt.entities.Category;
-import com.httt.entities.Product;
+import com.httt.entities.ProductLog;
 
 @Controller
 public class ManagerController {
@@ -38,7 +38,7 @@ public class ManagerController {
 	@RequestMapping(value = { "/admin" })
 	public String getSignupForm(HttpServletRequest request, Model model) {
 		List<Category> categories = categoryDAO.getCategories();
-		List<Product> allProducts = productDAO.getProducts();
+		List<ProductLog> allProducts = productDAO.getProducts();
 
 		model.addAttribute("categories", categories);
 		model.addAttribute("products", allProducts);
@@ -63,20 +63,24 @@ public class ManagerController {
 		Integer price = Integer.parseInt(request.getParameter("price")); 
 		String description = request.getParameter("description");
 		Integer categoryId = Integer.parseInt(request.getParameter("category"));
+		Integer discount = Integer.parseInt(request.getParameter("discount"));
+		String code = request.getParameter("code");
+		String picture = request.getParameter("picture");
 		
-		Product product = Product.builder()
+		ProductLog product = ProductLog.builder()
 				.name(name)
+				.productCode(code)
 				.quantity(quantity)
 				.price(price)
-				.status(1)
-				.discount(0)
+				.picture(picture)
+				.discount(discount)
 				.description(description)
 				.categoryId(categoryId)
 				.build();
 		
 		boolean isAdded = productDAO.addNew(product);
 		
-		List<Product> allProducts = productDAO.getProducts();
+		List<ProductLog> allProducts = productDAO.getProducts();
 		List<Category> categories = categoryDAO.getCategories();
 		model.addAttribute("categories", categories);
 		model.addAttribute("products", allProducts);

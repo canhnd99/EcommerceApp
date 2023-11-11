@@ -85,17 +85,26 @@ button:hover {
 		    <label for="name"><b>Tên sản phẩm</b></label>
 		    <input type="text" placeholder="VD: Mắt kính" name="name" required>
 		    
+		    <label for="name"><b>Mã sản phẩm</b></label>
+		    <input type="text" placeholder="VD: HN123" name="code" required>
+		    
 		    <label for="quantity"><b>Số lượng</b></label>
 		    <input type="text" placeholder="VD: 20" name="quantity" required>
 		    
 		    <label for="price"><b>Giá</b></label>
 		    <input type="text" placeholder="VD: 500.000" name="price" required>
 		    
+		    <label for="price"><b>Giảm giá (%)</b></label>
+		    <input type="text" placeholder="VD: 10" name="discount" required>
+		    
 		    <label for="description"><b>Mô tả</b></label>
 		    <input type="text" placeholder="VD: Mô tả" name="description" required>
 		    
+		    <label for="description"><b>Ảnh</b></label>
+		    <input type="text" placeholder="VD: Tên ảnh sản phẩm" name="picture" required>
+		    
 		    <label for="category"><b>Danh mục</b></label>
-		    <select name="category">
+		    <select name="category" style="width: 50%; height: 40px; border-radius: 5px; margin-bottom: 80px;">
 		    	<option value="1">Điện tử</option>
 		    	<option value="2">Quấn áo</option>
 		    	<option value="3">Gia dụng</option>

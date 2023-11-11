@@ -67,6 +67,7 @@ public class AccountController {
 				.address(address)
 				.fullName(fullname)
 				.avatar("")
+				.role("USER")
 				.createDate(new Date())
 				.build();
 

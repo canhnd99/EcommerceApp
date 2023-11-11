@@ -92,7 +92,7 @@ button:hover {
 				<input type="text" placeholder="VD: 0357623918" name="phone" value="0346770412" required> 
 				
 				<label for="password"><b>Mật khẩu</b></label> 
-				<input type="password" placeholder="..........." name="password" value="admin@123" required>
+				<input type="password" placeholder="..........." name="password" value="Admin@123" required>
 
 				<div class="clearfix">
 					<div class="submit-btn">

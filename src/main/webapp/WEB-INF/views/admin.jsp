@@ -89,10 +89,12 @@ button:hover {
 		  <thead>
 		    <tr>
 		      <th scope="col">Tên sản phẩm</th>
+		      <th scope="col">Mã sản phẩm</th>
 		      <th scope="col">Số lượng</th>
-		      <th scope="col">Giá</th>
+		      <th scope="col">Giá (VNĐ)</th>
 		      <th scope="col">Trạng thái</th>
 		      <th scope="col">Giảm giá</th>
+		      <th scope="col">Ngày áp dụng giảm giá</th>
 		      <th scope="col">Mô tả</th>
 		    </tr>
 		  </thead>
@@ -100,10 +102,12 @@ button:hover {
 		  	<c:forEach items="${products}" var="p">
 		  			<tr>
 				      <td>${p.name}</td>
+				      <td>${p.productCode}</td>
 				      <td>${p.quantity}</td>
 				      <td>${p.price}</td>
 				      <td>${p.status}</td>
 				      <td>${p.discount}</td>
+				      <td><fmt:formatDate pattern = "dd-MM-yyyy" value = "${p.startDateDiscount}" /></td>
 				      <td>${p.description}</td>
 				      <td><button>Cập nhật</button></td>
 				      <td><button>Xóa</button></td>
