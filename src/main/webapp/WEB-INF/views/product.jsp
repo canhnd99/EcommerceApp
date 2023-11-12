@@ -61,15 +61,15 @@
 <!-- 						</div>	 -->
 <!-- 					</div> -->
 					<!-- Search product -->
-					<div class="panel-search">
-						<div class="bor8 dis-flex p-l-15">
-							<button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
-								<i class="zmdi zmdi-search"></i>
-							</button>
+<!-- 					<div class="panel-search"> -->
+<!-- 						<div class="bor8 dis-flex p-l-15"> -->
+<!-- 							<button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04"> -->
+<!-- 								<i class="zmdi zmdi-search"></i> -->
+<!-- 							</button> -->
 	
-							<input class="mtext-107 cl2 size-114 plh2 p-r-15" id="searchBox" type="text" name="search-product" placeholder="Tìm kiếm theo tên">
-						</div>	
-					</div>
+<!-- 							<input class="mtext-107 cl2 size-114 plh2 p-r-15" id="searchBox" type="text" name="search-product" placeholder="Tìm kiếm theo tên"> -->
+<!-- 						</div>	 -->
+<!-- 					</div> -->
 				</div>
 				
 				<!-- Search product -->

@@ -2,28 +2,29 @@ package com.httt.dao;
 
 import java.util.List;
 
+import com.httt.entities.Product;
 import com.httt.entities.ProductLog;
 
 public interface ProductDAO {
-	public List<ProductLog> getProducts();
+	public List<Product> getProducts();
 	
-	public List<ProductLog> getByCategory(Integer categoryId);
+	public List<Product> getByCategory(Integer categoryId);
 
-	public List<ProductLog> getNewestProducts(Integer numberOfNewestProducts);
+	public List<Product> getNewestProducts(Integer numberOfNewestProducts);
 	
-	public List<ProductLog> getFeatureProducts();
+	public List<Product> getFeatureProducts();
 	
-	public List<ProductLog> getDiscountProducts();
+	public List<Product> getDiscountProducts();
 	
-	public List<ProductLog> getBestSaleProducts(Integer numberOfProducts);
+	public List<Product> getBestSaleProducts(Integer numberOfProducts);
 	
-	public List<ProductLog> search(String key);
+	public List<Product> search(String key);
 
-	public ProductLog getProductDetail(Integer prodId);
+	public Product getProductDetail(Integer prodId);
 	
-	public List<ProductLog> getRelatedProducts(Integer categoryId);
+	public List<Product> getRelatedProducts(Integer categoryId);
 	
-	public ProductLog findById(int id);
+	public Product findById(int id);
 
 	public boolean addNew(ProductLog product);
 }

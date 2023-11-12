@@ -51,4 +51,23 @@ public class AccountDAOImpl implements AccountDAO {
 		return null;
 	}
 	
+	@Override
+	public Account findByPhone(String phone) {
+		Session session = sessionFactory.openSession();
+		try {
+			String sqlQuery = "from Account c where c.phone = :phone";
+			Query<Account> query = session.createQuery(sqlQuery);
+			
+			query.setParameter("phone", phone);
+			
+			Account account = query.getResultList().get(0);
+			return account;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return null;
+	}
+	
 }

@@ -38,7 +38,7 @@
 			<div class="top-bar">
 				<div class="content-topbar flex-sb-m h-full container">
 					<div class="left-top-bar">
-						Miễn phí ship cho đơn hàng lớn hơn 500 VNĐ
+						Miễn phí ship cho đơn hàng lớn hơn 500.000 VNĐ
 					</div>
 					<c:if test="${account == null}">
 						<div class="right-top-bar flex-w h-full">

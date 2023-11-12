@@ -109,10 +109,10 @@
 									</div>
 									
 									<c:url value="/cart/add?productId=${product.productId}&quantity=" var="addToCart"></c:url>
-<%-- 									<a href="${addToCart}" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04"> --%>
-<!-- 										Thêm vào giỏ hàng -->
-<!-- 									</a> -->
-									<button onclick="addToCartt(${product.quantity},${product.productId})" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
+									<button style="width: 100%" onclick="addToCartt(${product.quantity},${product.productId})" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
+										Mua ngay
+									</button>
+									<button style="margin-top: 10px; width: 100%; background-color: red; display: none" onclick="buyNow(${product.quantity},${product.productId})" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
 										Thêm vào giỏ hàng
 									</button>
 								</div>
@@ -188,7 +188,7 @@
 		} else if (quantity < input.value) {
 			alert("Bạn đã nhập quá số lượng sản phẩm trong kho!")
 		} else {
-			var url = "http://localhost:8080/efarm/cart/add?productId=" + productId + "&quantity=" + input.value
+			var url = "http://localhost:8080/cart/add?productId=" + productId + "&quantity=" + input.value
 			window.open(url, '_self').focus();
 		}
 	}

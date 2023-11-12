@@ -6,4 +6,6 @@ import com.httt.entities.Payment;
 
 public interface PaymentDAO {
 	public List<Payment> getPaymentMethods();
+	
+	public boolean addPayment(Payment payment);
 }

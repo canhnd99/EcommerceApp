@@ -24,7 +24,7 @@
 	</div>
 
 	<!-- Shoping Cart -->
-	<form class="bg0 p-t-75 p-b-85">
+	<form action="${rootPath}/payment/add" class="bg0 p-t-75 p-b-85", method="POST">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
@@ -43,7 +43,7 @@
 									<tr class="table_row">
 										<td class="column-1">
 											<div class="how-itemcart1">
-												<img src="${item.product.picture}" alt="IMG">
+												<img src="/resources/images/${item.product.picture}" alt="IMG">
 											</div>
 										</td>
 										<td class="column-2">${item.product.name}</td>
@@ -67,17 +67,6 @@
 							</table>
 						</div>
 						<div class="flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-40 p-lr-15-sm">
-<!-- 							<div class="flex-w flex-m m-r-20 m-tb-5"> -->
-<!-- 								<input class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text" name="coupon" placeholder="Coupon Code"> -->
-									
-<!-- 								<div class="flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5"> -->
-<!-- 									Apply coupon -->
-<!-- 								</div> -->
-<!-- 							</div> -->
-
-							<div class="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">
-								Cập nhật giỏ hàng
-							</div>
 						</div>
 					</div>
 				</div>
@@ -107,33 +96,31 @@
 								<br/>
 								
 								<c:if test="${ACCOUNT != null}">
-									<span class="stext-110 cl2">
-										Khách hàng: ${ACCOUNT.fullName}
-									</span>
-									<br/>
-									
-									<span class="stext-110 cl2">
-										Địa chỉ: ${ACCOUNT.address}
-									</span>
-									<br/>
-									
-									<span class="stext-110 cl2">
-										Số điện thoại: ${ACCOUNT.phone}
-									</span>
-									<br/>
+									<label>Khách hàng: </label>
+									<input style="border: 1px solid; width: 285px" name="custName" value="${ACCOUNT.fullName}" 
+										id="custName" type="text">
+
+									<label>Địa chỉ: </label>
+									<input style="border: 1px solid; width: 285px" name="custAddress" value="${ACCOUNT.address}" 
+										id="custAddress" type="text">
+
+									<label>Số điện thoại: </label>
+									<input style="border: 1px solid; width: 285px" name="custPhone" value="${ACCOUNT.phone}"
+										id="custPhone" type="text">
 								</c:if>
 								
 								<c:if test="${ACCOUNT == null}">
-									<form>
-										<label>Tên khách hàng: </label>
-										<input name="custName" id="custName" type="text">
-										
-										<label>Địa chỉ: </label>
-										<input name="custName" id="custName" type="text">
-										
-										<label>Số điện thoại: </label>
-										<input name="custName" id="custName" type="text">
-									</form>
+									<label>Tên khách hàng: </label>
+									<input style="border: 1px solid; width: 285px" name="custName"
+										id="custName" type="text">
+
+									<label>Địa chỉ: </label>
+									<input style="border: 1px solid; width: 285px" name="custAddress"
+										id="custAddress" type="text">
+
+									<label>Số điện thoại: </label>
+									<input style="border: 1px solid; width: 285px" name="custPhone"
+										id="custPhone" type="text">
 								</c:if>
 								
 								<span class="stext-110 cl2">
@@ -147,28 +134,22 @@
 								<br/>
 								
 								<span class="stext-110 cl2">
-									HT vận chuyển:
-								</span>
-								<br/> 
-								<select style="font-family: Poppins-Bold" name="province">
-									<c:forEach items="${transports}" var="t">
-										<option value="${t.transportName}">${t.transportName}</option>
-									</c:forEach>
-								</select>
-								<div class="dropDownSelect2"></div>
-
-								<br/>
-								
-								<span class="stext-110 cl2">
 									HT thanh toán:
 								</span>
 								<br/> 
-								<select style="font-family: Poppins-Bold" name="province">
-									<c:forEach items="${payments}" var="p">
-										<option value="${p.payName}">${p.payName}</option>
-									</c:forEach>
+								<select style="font-family: Poppins-Bold" name="paymentType" id="paymentTypeId" onchange="showAccountInfo()">
+									<option value="1">Thanh toán khi nhận hàng</option>
+									<option value="2">Chuyển khoản ngân hàng</option>
 								</select>
 								<div class="dropDownSelect2"></div>
+								
+								<div id="accountInfo" style="display: none;">
+									<label>Tên chủ tài khoản: </label>
+									<input style="border: 1px solid; width: 285px" name="accountName" id="accountName" type="text">
+
+									<label>Số tài khoản: </label>
+									<input style="border: 1px solid; width: 285px" name="accountNo" id="accountNo" type="text">
+								</div>
 							</div>
 						</div>
 
@@ -192,7 +173,7 @@
 							</div>
 						</div>
 
-						<button class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
+						<button type="submit" class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
 							THANH TOÁN
 						</button>
 					</div>
@@ -201,6 +182,15 @@
 		</div>
 	</form>
 </body>
-
+<script>
+	function showAccountInfo() {
+		var val = document.getElementById("paymentTypeId").value;
+		if(val == "2") {
+			document.getElementById("accountInfo").style.display = "block";
+		} else {
+			document.getElementById("accountInfo").style.display = "none";
+		}
+	}
+</script>
 <!-- Footer -->
 <jsp:include page="footer.jsp" flush="true"/>

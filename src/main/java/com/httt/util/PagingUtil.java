@@ -5,10 +5,10 @@ import java.util.List;
 
 import com.httt.dto.PageInfo;
 import com.httt.dto.PagingResponse;
-import com.httt.entities.ProductLog;
+import com.httt.entities.Product;
 
 public class PagingUtil {
-	public static PagingResponse getPagingResponse(List<ProductLog> allProducts, Integer pageSize, Integer page) {
+	public static PagingResponse getPagingResponse(List<Product> allProducts, Integer pageSize, Integer page) {
 		Integer currentPage = null;
 		if (page == null || page == 1) {
 			currentPage = 1;
@@ -17,7 +17,7 @@ public class PagingUtil {
 		}
 
 		Integer size = pageSize * currentPage + (currentPage - 1);
-		List<ProductLog> products = new ArrayList<>();
+		List<Product> products = new ArrayList<>();
 		if (size <= allProducts.size() - 1) {
 			for (int idx = size-pageSize; idx <= size; idx++) {
 				products.add(allProducts.get(idx));

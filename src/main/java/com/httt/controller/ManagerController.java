@@ -1,6 +1,8 @@
 package com.httt.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,7 +18,9 @@ import com.httt.dao.AccountDAO;
 import com.httt.dao.CategoryDAO;
 import com.httt.dao.ProductDAO;
 import com.httt.entities.Category;
+import com.httt.entities.Product;
 import com.httt.entities.ProductLog;
+import com.httt.util.SessionUtil;
 
 @Controller
 public class ManagerController {
@@ -38,7 +42,15 @@ public class ManagerController {
 	@RequestMapping(value = { "/admin" })
 	public String getSignupForm(HttpServletRequest request, Model model) {
 		List<Category> categories = categoryDAO.getCategories();
-		List<ProductLog> allProducts = productDAO.getProducts();
+		List<Product> allProducts = productDAO.getProducts();
+		
+		//check role
+		HashMap<String, Object> account = (HashMap<String, Object>) SessionUtil.getInstance().getValue(request, "ACCOUNT");
+		if(Objects.isNull(account)) {
+			
+		} else {
+			
+		}
 
 		model.addAttribute("categories", categories);
 		model.addAttribute("products", allProducts);
@@ -80,7 +92,7 @@ public class ManagerController {
 		
 		boolean isAdded = productDAO.addNew(product);
 		
-		List<ProductLog> allProducts = productDAO.getProducts();
+		List<Product> allProducts = productDAO.getProducts();
 		List<Category> categories = categoryDAO.getCategories();
 		model.addAttribute("categories", categories);
 		model.addAttribute("products", allProducts);

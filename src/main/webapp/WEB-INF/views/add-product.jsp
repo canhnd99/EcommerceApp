@@ -105,10 +105,10 @@ button:hover {
 		    
 		    <label for="category"><b>Danh mục</b></label>
 		    <select name="category" style="width: 50%; height: 40px; border-radius: 5px; margin-bottom: 80px;">
-		    	<option value="1">Điện tử</option>
-		    	<option value="2">Quấn áo</option>
-		    	<option value="3">Gia dụng</option>
-		    	<option value="4">Khác</option>
+		    	<option value="1">Bàn phím</option>
+		    	<option value="2">Laptop</option>
+		    	<option value="3">Màn hình</option>
+		    	<option value="4">Chuột máy tính</option>
 		    </select>
 		
 		    <div class="clearfix">
