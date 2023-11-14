@@ -109,7 +109,7 @@
 									</div>
 									
 									<c:url value="/cart/add?productId=${product.productId}&quantity=" var="addToCart"></c:url>
-									<button style="width: 100%" onclick="addToCartt(${product.quantity},${product.productId})" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
+									<button style="width: 100%" onclick="addToCart(${product.quantity},${product.productId})" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
 										Mua ngay
 									</button>
 									<button style="margin-top: 10px; width: 100%; background-color: red; display: none" onclick="buyNow(${product.quantity},${product.productId})" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
@@ -141,7 +141,7 @@
 							<!-- Block2 -->
 							<div class="block2">
 								<div class="block2-pic hov-img0">
-									<img src="${p.picture}" alt="IMG-PRODUCT">
+									<img src="/resources/images/${p.picture}" alt="IMG-PRODUCT">
 	
 									<a href="${rootPath}/productDetail?prodId=${p.productId}" 
 										class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
@@ -181,7 +181,7 @@
 	</section>
 </body>
 <script>
-	function addToCartt(quantity, productId) {
+	function addToCart(quantity, productId) {
 		var input = document.getElementById('quantity');
 		if(input.value < 1) {
 			alert("Chọn số lượng trước khi thêm vào giỏ hàng!")

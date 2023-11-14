@@ -106,7 +106,7 @@ public class AccountController {
 			// admin -> redirect to admin page
 			String role = loginAccount.getRole();
 			if("ADMIN".equals(role)) {
-				resp.sendRedirect(rootPath + "/admin");
+				resp.sendRedirect(rootPath + "/admin/products");
 			} else {
 				resp.sendRedirect(rootPath);
 			}

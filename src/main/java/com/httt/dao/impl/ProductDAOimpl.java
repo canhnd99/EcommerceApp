@@ -97,11 +97,11 @@ public class ProductDAOimpl implements ProductDAO {
 	}
 	
 	@Override
-	public Product getProductDetail(Integer prodId) {		
+	public Product getProductDetail(Integer productId) {		
 		Session session = sessionFactory.openSession();
 		Product product = new Product();
 		try {
-			product = session.get(Product.class, prodId);
+			product = session.get(Product.class, productId);
 			return product;
 		} catch (Exception e) {
 			e.printStackTrace();

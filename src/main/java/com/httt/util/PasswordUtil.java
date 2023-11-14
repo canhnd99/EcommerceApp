@@ -23,4 +23,9 @@ public class PasswordUtil {
 		}
 		return hashtext;
 	}
+	
+	public static void main(String[] args) {
+		String pass = "user";
+		System.out.println(getMD5Password(pass));
+	}
 }

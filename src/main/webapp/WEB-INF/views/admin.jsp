@@ -109,7 +109,6 @@ button:hover {
 				      <td>${p.discount}</td>
 				      <td><fmt:formatDate pattern = "dd-MM-yyyy" value = "${p.startDateDiscount}" /></td>
 				      <td>${p.description}</td>
-				      <td><button>Cập nhật</button></td>
 				      <td><button>Xóa</button></td>
 				    </tr>
 			</c:forEach>	
