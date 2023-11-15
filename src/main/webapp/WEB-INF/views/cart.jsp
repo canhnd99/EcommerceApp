@@ -27,7 +27,7 @@
 							<c:forEach items="${cart.items}" var="item">
 								<li class="header-cart-item flex-w flex-t m-b-12">
 									<div class="header-cart-item-img">
-										<img src="${item.product.picture}" alt="IMG">
+										<img src="/resources/images/${item.product.picture}" alt="IMG">
 									</div>
 			
 									<div class="header-cart-item-txt p-t-8">
@@ -52,9 +52,6 @@
 							<a href="${rootPath}/cart/view" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
 								Xem giỏ hàng
 							</a>
-<!-- 							<a href="shoping-cart.html" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10"> -->
-<!-- 								Xóa giỏ hàng -->
-<!-- 							</a> -->
 						</div>
 					</div>
 				</c:if>

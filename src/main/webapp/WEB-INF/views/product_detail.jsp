@@ -110,7 +110,7 @@
 									
 									<c:url value="/cart/add?productId=${product.productId}&quantity=" var="addToCart"></c:url>
 									<button style="width: 100%" onclick="addToCart(${product.quantity},${product.productId})" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
-										Mua ngay
+										Đặt hàng
 									</button>
 									<button style="margin-top: 10px; width: 100%; background-color: red; display: none" onclick="buyNow(${product.quantity},${product.productId})" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
 										Thêm vào giỏ hàng

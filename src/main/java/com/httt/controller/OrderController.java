@@ -21,7 +21,6 @@ import com.httt.dao.OrderDAO;
 import com.httt.dao.OrderDetailDAO;
 import com.httt.dao.PaymentDAO;
 import com.httt.dao.ProductDAO;
-import com.httt.dao.TransportDAO;
 import com.httt.dto.Cart;
 import com.httt.dto.Item;
 import com.httt.entities.Account;
@@ -30,7 +29,6 @@ import com.httt.entities.Order;
 import com.httt.entities.OrderDetail;
 import com.httt.entities.Payment;
 import com.httt.entities.Product;
-import com.httt.entities.Transport;
 import com.httt.util.SessionUtil;
 
 import jakarta.transaction.Transactional;
@@ -50,9 +48,6 @@ public class OrderController {
 	private ProductDAO productDAO;
 	
 	@Autowired
-	private TransportDAO transportDAO;
-	
-	@Autowired
 	private PaymentDAO paymentDAO;
 	
 	@Autowired
@@ -66,7 +61,6 @@ public class OrderController {
 	public String product(HttpServletRequest req, HttpServletResponse resp, Model model) {
 		List<Category> categories = categoryDAO.getCategories();
 		List<Payment> payments = paymentDAO.getPaymentMethods();
-		List<Transport> transports = transportDAO.getTransports();
 				
 		HttpSession session = req.getSession();
 		Cart cart = (Cart) session.getAttribute("cart");
@@ -74,7 +68,6 @@ public class OrderController {
 		
 		model.addAttribute("categories", categories);
 		model.addAttribute("payments", payments);
-		model.addAttribute("transports", transports);
 		model.addAttribute("rootPath", rootPath);
 		model.addAttribute("account", SessionUtil.getInstance().getValue(req, "ACCOUNT"));
 		return "shoping_cart";
@@ -85,7 +78,6 @@ public class OrderController {
 	public String addToCart(HttpServletRequest req, HttpServletResponse resp, Model model) {
 		List<Category> categories = categoryDAO.getCategories();
 		List<Payment> payments = paymentDAO.getPaymentMethods();
-		List<Transport> transports = transportDAO.getTransports();
 		
 		int quantity = 1;
 		int totalQuantity = 0;
@@ -93,7 +85,7 @@ public class OrderController {
 		int prodId;
 		
 		Account account = (Account)SessionUtil.getInstance().getValue(req, "ACCOUNT");
-		
+		Order order = new Order();
 		if(req.getParameter("productId") != null) {
 			prodId = Integer.parseInt(req.getParameter("productId"));
 			
@@ -104,99 +96,49 @@ public class OrderController {
 					
 					int dbQuantity = product.getQuantity();
 				}
-				Cart cart;
 				
 				HttpSession session = req.getSession();
-				if(session.getAttribute("cart") == null) {
-					cart = new Cart();
-					List<Item> items = new ArrayList<>();
-					
-					Item item = new Item();
-					item.setQuantity(quantity);
-					item.setProduct(product);
-					item.setPrice(product.getPrice() - product.getDiscount());
-					
-					items.add(item);
-					cart.setItems(items);
-					
-					for(Item i: items) {
-						totalQuantity += i.getQuantity();
-						totalPrice += (i.getProduct().getPrice() - i.getProduct().getDiscount()) * i.getQuantity();
-					}
-					
-					SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");	
-					Date date = new Date();
-					
-					String orderCode = product.getProductCode() + sdf.format(new Date());
-					Order order = new Order();
-					order.setOrderCode(orderCode);
-					order.setTotalPrice(totalPrice);
-					order.setCreateDate(date);
-					order.setCustomerId(Objects.nonNull(account) ? account.getCustomerId() : null);
-					boolean isOrderAdded = orderDAO.addOrder(order);
-					
-					if(isOrderAdded) {
-						order = orderDAO.findByOrderCode(orderCode);
-						for(Item it: items) {
-							OrderDetail orderDetail = new OrderDetail();
-							orderDetail.setOrderId(order.getOrderId());
-							orderDetail.setQuantity(it.getQuantity());
-							orderDetail.setPrice(it.getPrice());
-							orderDetail.setProductId(product.getProductId());
-							orderDetail.setCreateDate(date);
-							
-							orderDetailDAO.addOrderDetail(orderDetail);
-						}
-					}
-										
-				} else {
-					cart = (Cart) session.getAttribute("cart");
-					List<Item> items = cart.getItems();
-					boolean check = false;
-					for(Item item: items) {
-						if(item.getProduct().getProductId() == product.getProductId()) {
-							item.setQuantity(item.getQuantity() + quantity);
-							check = true;
-						}
-					}
-					if(check==false) {
-						Item item = new Item();
-						item.setQuantity(quantity);
-						item.setProduct(product);
-						item.setPrice(product.getPrice());
-						items.add(item);
-					}
-					
-					for(Item i: items) {
-						totalQuantity += i.getQuantity();
-						totalPrice += (i.getProduct().getPrice() - i.getProduct().getDiscount()) * i.getQuantity();
-					}
-					
-					SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");	
-					Date date = new Date();
-					
-					String orderCode = product.getProductCode() + sdf.format(new Date());
-					Order order = new Order();
-					order.setOrderCode(orderCode);
-					order.setTotalPrice(totalPrice);
-					order.setCreateDate(date);
-					order.setCustomerId(Objects.nonNull(account) ? account.getCustomerId() : null);
-					boolean isOrderAdded = orderDAO.addOrder(order);
-					
-					if(isOrderAdded) {
-						order = orderDAO.findByOrderCode(orderCode);
-						for(Item it: items) {
-							OrderDetail orderDetail = new OrderDetail();
-							orderDetail.setOrderId(order.getOrderId());
-							orderDetail.setQuantity(it.getQuantity());
-							orderDetail.setPrice(it.getPrice());
-							orderDetail.setProductId(product.getProductId());
-							orderDetail.setCreateDate(date);
-							
-							orderDetailDAO.addOrderDetail(orderDetail);
-						}
+				SessionUtil.getInstance().removeValue(req, "cart");
+				Cart cart = new Cart();
+				List<Item> items = new ArrayList<>();
+				
+				Item item = new Item();
+				item.setQuantity(quantity);
+				item.setProduct(product);
+				item.setPrice(product.getPrice() - product.getDiscount());
+				
+				items.add(item);
+				cart.setItems(items);
+				
+				for(Item i: items) {
+					totalQuantity += i.getQuantity();
+					totalPrice += (i.getProduct().getPrice() - i.getProduct().getDiscount()) * i.getQuantity();
+				}
+				
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");	
+				Date date = new Date();
+				
+				String orderCode = product.getProductCode() + sdf.format(new Date());
+				order.setOrderCode(orderCode);
+				order.setTotalPrice(totalPrice);
+				order.setCreateDate(date);
+				order.setCustomerId(Objects.nonNull(account) ? account.getCustomerId() : null);
+				boolean isOrderAdded = orderDAO.addOrder(order);
+				
+				if(isOrderAdded) {
+					order = orderDAO.findByOrderCode(orderCode);
+					for(Item it: items) {
+						OrderDetail orderDetail = new OrderDetail();
+						orderDetail.setOrderId(order.getOrderId());
+						orderDetail.setQuantity(it.getQuantity());
+						orderDetail.setPrice(it.getPrice());
+						orderDetail.setProductId(product.getProductId());
+						orderDetail.setCreateDate(date);
+						
+						orderDetailDAO.addOrderDetail(orderDetail);
 					}
 				}
+				
 				cart.setQuantity(totalQuantity);
 				cart.setTotalPrice(totalPrice);
 				session.setAttribute("cart", cart);
@@ -205,6 +147,7 @@ public class OrderController {
 		
 		model.addAttribute("payments", payments);
 		model.addAttribute("categories", categories);
+		model.addAttribute("order", order);
 		model.addAttribute("rootPath", rootPath);
 		model.addAttribute("account", account);
 		return "shoping_cart";

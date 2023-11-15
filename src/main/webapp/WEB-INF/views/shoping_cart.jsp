@@ -80,13 +80,13 @@
 						<div class="flex-w flex-t bor12 p-b-13">
 							<div class="size-208">
 								<span class="stext-110 cl2">
-									Sản phẩm:
+									Mã đơn hàng:
 								</span>
 							</div>
 
 							<div class="size-209">
 								<span class="mtext-110 cl2">
-									<fmt:formatNumber value = "${cart.totalPrice}" type="number" maxFractionDigits="0"/>đ
+									<input style="border: none" name="orderCode" value="${order.orderCode}">
 								</span>
 							</div>
 						</div>
