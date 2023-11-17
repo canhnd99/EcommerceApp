@@ -25,7 +25,7 @@ public class PasswordUtil {
 	}
 	
 	public static void main(String[] args) {
-		String pass = "user";
+		String pass = "1234";
 		System.out.println(getMD5Password(pass));
 	}
 }

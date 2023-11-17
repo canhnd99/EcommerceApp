@@ -83,21 +83,11 @@
 							<c:if test="${currentMenu == 'productPage'}">
 								<li class="active-menu">
 									<a href="${rootPath}/products/paging">Sản phẩm</a>
-									<ul class="sub-menu">
-										<li><a href="${rootPath}/products/newest">Sản phẩm mới nhất</a></li>
-										<li><a href="${rootPath}/products/discount">Sản phẩm giảm giá</a></li>
-										<li><a href="${rootPath}/products/bestsale">Sản phẩm bán chạy</a></li>
-									</ul>
 								</li>
 							</c:if>
 							<c:if test="${currentMenu != 'productPage'}">
 								<li>
 									<a href="${rootPath}/products/paging">Sản phẩm</a>
-									<ul class="sub-menu">
-										<li><a href="${rootPath}/products/newest">Sản phẩm mới nhất</a></li>
-										<li><a href="${rootPath}/products/discount">Sản phẩm giảm giá</a></li>
-										<li><a href="${rootPath}/products/bestsale">Sản phẩm bán chạy</a></li>
-									</ul>
 								</li>
 							</c:if>
 
@@ -114,8 +104,6 @@
 
 							<c:if test="${currentMenu == 'productFeaturePage'}">
 							</c:if>
-							
-
 							<li>
 								<a href="${rootPath}/contact">Liên hệ</a>
 							</li>
