@@ -108,16 +108,15 @@ public class ManagerController {
 			String code = request.getParameter("code");
 			String picture = request.getParameter("picture");
 			
-			ProductLog product = ProductLog.builder()
-					.name(name)
-					.productCode(code)
-					.quantity(quantity)
-					.price(price)
-					.picture(picture)
-					.discount(discount)
-					.description(description)
-					.categoryId(categoryId)
-					.build();
+			ProductLog product = new ProductLog();
+			product.setName(name);
+			product.setProductCode(code);
+			product.setQuantity(quantity);
+			product.setPrice(price);
+			product.setPicture(picture);
+			product.setDiscount(discount);
+			product.setDescription(description);
+			product.setCategoryId(categoryId);
 			
 			boolean isAdded = productDAO.addNew(product);
 			

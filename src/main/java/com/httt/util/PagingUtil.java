@@ -32,17 +32,17 @@ public class PagingUtil {
 		List<PageInfo> pageInfo = new ArrayList<>();
 		Integer totalPages = allProducts.size() / pageSize + 1;
 		for(int idx=0; idx<totalPages; idx++) {
-			PageInfo info = PageInfo.builder()
-					.totalPages(totalPages)
-					.page(idx+1)
-					.build();
+			PageInfo info = new PageInfo();
+			info.setPage(idx+1);
+			info.setTotalPages(totalPages);
+				
 			pageInfo.add(info);
 		}
 		
-		PagingResponse response = PagingResponse.builder()
-				.products(products)
-				.pageInfo(pageInfo)
-				.build();
+		PagingResponse response = new PagingResponse();
+		response.setProducts(products);
+		response.setPageInfo(pageInfo);
+				
 		return response;
 	}
 

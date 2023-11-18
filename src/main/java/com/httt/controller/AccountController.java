@@ -59,17 +59,16 @@ public class AccountController {
 		
 		String encodePass = PasswordUtil.getMD5Password(password);
 
-		Account account = Account.builder()
-				.username(username)
-				.password(encodePass)
-				.phone(phone)
-				.email(email)
-				.address(address)
-				.fullName(fullname)
-				.avatar("")
-				.role("USER")
-				.createDate(new Date())
-				.build();
+		Account account = new Account();
+		account.setUsername(username);
+		account.setPassword(encodePass);
+		account.setPhone(phone);
+		account.setEmail(email);
+		account.setAddress(address);
+		account.setFullName(fullname);
+		account.setAvatar("");
+		account.setRole("USER");
+		account.setCreateDate(new Date());
 
 		boolean isRegis = accountDAO.signup(account);
 		
